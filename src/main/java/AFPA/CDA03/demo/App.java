@@ -1,5 +1,6 @@
 package AFPA.CDA03.demo;
 
+import controller.PersonEditDialogController;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import metier.classes.*;
 import model.Person;
 import controller.PersonOverviewController;
+import javafx.stage.Modality;
 //import metier.exceptions.*;
 
 /**
@@ -24,9 +26,9 @@ import controller.PersonOverviewController;
  */
 public class App extends Application
 {
-    private Stage primaryStage;
+    private static Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<Person> personData = FXCollections.observableArrayList();
+    private static ObservableList<Person> personData = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage primaryStage) {
@@ -53,7 +55,6 @@ public class App extends Application
                 Person person = new Person(Resultat.getString("RSCLIENT"), Resultat.getString("ADRCLIENT"));
                 personData.add(person);
             }
-            System.out.println("***********   avant lecture ************");
 //           for (Person person : getPersonData()) {
 //               System.out.println("lect : " + person.getFirstName());
 //        }
@@ -70,6 +71,7 @@ public class App extends Application
             System.out.println("pb connexion");
             e.printStackTrace();
         }
+        
         initRootLayout();
 
         showPersonOverview();
@@ -78,7 +80,7 @@ public class App extends Application
 
         
     }
-    public ObservableList<Person> getPersonData() {
+    public static ObservableList<Person> getPersonData() {
             return personData;
     }
     /**
@@ -134,8 +136,45 @@ public class App extends Application
      * Returns the main stage.
      * @return
      */
-    public Stage getPrimaryStage() {
+    public static Stage getPrimaryStage() {
         return primaryStage;
+    }
+        /**
+     * Opens a dialog to edit details for the specified person. If the user
+     * clicks OK, the changes are saved into the provided person object and true
+     * is returned.
+     *
+     * @param person the person object to be edited
+     * @return true if the user clicked OK, false otherwise.
+     */
+    public boolean showPersonEditDialog(Person person) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("PersonEditDialog.fxml"));
+           
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            // Set the person into the controller.
+            PersonEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPerson(person);
+             
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     public static void main( String[] args )
     {

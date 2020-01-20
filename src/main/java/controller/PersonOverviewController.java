@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import AFPA.CDA03.demo.App;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import model.Person;
 import util.DateUtil;
 
@@ -109,6 +111,57 @@ public class PersonOverviewController {
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
-        personTable.getItems().remove(selectedIndex);
+        if (selectedIndex >= 0) {
+            personTable.getItems().remove(selectedIndex);
+        }
+        else {
+           // Nothing selected.
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.initOwner(App.getPrimaryStage());
+        alert.setTitle("No Selection");
+        alert.setHeaderText("No Person Selected");
+        alert.setContentText("Please select a person in the table.");
+
+        alert.showAndWait(); 
+        }
     }
+    /**
+ * Called when the user clicks the new button. Opens a dialog to edit
+ * details for a new person.
+ */
+@FXML
+private void handleNewPerson() {
+    Person tempPerson = new Person();
+    App app = new App();
+    boolean okClicked = app.showPersonEditDialog(tempPerson);
+    if (okClicked) {
+        App.getPersonData().add(tempPerson);
+    }
+}
+
+/**
+ * Called when the user clicks the edit button. Opens a dialog to edit
+ * details for the selected person.
+ */
+@FXML
+private void handleEditPerson() {
+    Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+    if (selectedPerson != null) {
+        App app = new App();
+        boolean okClicked = app.showPersonEditDialog(selectedPerson);
+        if (okClicked) {
+            showPersonDetails(selectedPerson);
+        }
+
+    } else {
+        // Nothing selected.
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.initOwner(App.getPrimaryStage());
+        alert.setTitle("No Selection");
+        alert.setHeaderText("No Person Selected");
+        alert.setContentText("Please select a person in the table.");
+
+        alert.showAndWait();
+    }
+}
 }

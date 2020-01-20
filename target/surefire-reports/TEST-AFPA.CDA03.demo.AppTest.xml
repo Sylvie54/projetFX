@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AFPA.CDA03.demo.AppTest" time="0.014" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AFPA.CDA03.demo.AppTest" time="0.028" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\Acer\AppData\Local\Temp\surefire8929471800613439778\surefirebooter6972578955698151649.jar C:\Users\Acer\AppData\Local\Temp\surefire8929471800613439778 2020-01-20T20-11-15_527-jvmRun1 surefire1649844560299413979tmp surefire_0261325371921851203tmp"/>
+    <property name="sun.java.command" value="C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839\surefirebooter3894668439449208122.jar C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839 2020-01-20T21-45-17_985-jvmRun1 surefire2726378215871122268tmp surefire_04393466513050698029tmp"/>
     <property name="surefire.test.class.path" value="C:\Users\Acer\Documents\Maven\Projets\projetFX\target\test-classes;C:\Users\Acer\Documents\Maven\Projets\projetFX\target\classes;C:\Users\Acer\Documents\Maven\Repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Acer\Documents\Maven\Repository\AFPA\CDA03\demo\classesMetier\1.0-SNAPSHOT\classesMetier-1.0-SNAPSHOT.jar;C:\Users\Acer\Documents\Maven\Repository\com\microsoft\sqlserver\mssql-jdbc\8.1.1.jre8-preview\mssql-jdbc-8.1.1.jre8-preview.jar;C:\Users\Acer\Documents\Maven\Repository\mysql\mysql-connector-java\5.1.23\mysql-connector-java-5.1.23.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Acer"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Acer\AppData\Local\Temp\surefire8929471800613439778\surefirebooter6972578955698151649.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839\surefirebooter3894668439449208122.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_191\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
