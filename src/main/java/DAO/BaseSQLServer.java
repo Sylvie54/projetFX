@@ -99,16 +99,5 @@ public class BaseSQLServer {
             System.out.println(SQLex.getMessage());
         }
     }
-// String query = "UPDATE client "
-//                + "SET RSCLIENT = ? "
-//                + ",TYPECLIENT = ? "
-//                + ",DOMAINECLIENT = ? "
-//                + ",ADRCLIENT = ? "
-//                + ",TELCLIENT = ? "
-//                + ",CACLIENT = ? "
-//                + ",COMMENTAIRESCLIENT = ? "
-//                + ",NBREMPCLIENT = ? "
-//                + ",DATECONTRAT = ? "
-//                + ",ADRESSEMAIL = ? "
-//                + "WHERE IDCLIENT = ? ";   
+ 
 }

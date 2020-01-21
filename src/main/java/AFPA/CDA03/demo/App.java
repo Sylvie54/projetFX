@@ -15,6 +15,7 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
+import javax.swing.JOptionPane;
 
 //import metier.exceptions.*;
 
@@ -24,7 +25,16 @@ import DAO.*;
  */
 public class App extends Application
 {
+    private static int choix;
     private static Stage primaryStage;
+
+    public static int getChoix() {
+        return choix;
+    }
+
+    public static void setChoix(int aChoix) {
+        choix = aChoix;
+    }
     private BorderPane rootLayout;
     private static ObservableList<Person> personData = FXCollections.observableArrayList();
 
@@ -32,10 +42,18 @@ public class App extends Application
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
-
-        BaseSQLServer.AccesBase();
-        BaseSQLServer.selectAll();
-        
+        String saisie = JOptionPane.showInputDialog(null, "mysql ou sqlserver");
+        choix = Integer.parseInt(saisie);
+        if (choix == 1)
+        {
+            BaseMySQL.AccesBase();
+            BaseMySQL.selectAll();
+        }
+        else
+        {    
+            BaseSQLServer.AccesBase();
+            BaseSQLServer.selectAll();
+        }
         initRootLayout();
 
         showPersonOverview();
