@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AFPA.CDA03.demo.AppTest" time="0.028" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AFPA.CDA03.demo.AppTest" time="0.011" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -7,7 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Acer\Documents\Maven\Projets\projetFX\target\test-classes;C:\Users\Acer\Documents\Maven\Projets\projetFX\target\classes;C:\Users\Acer\Documents\Maven\Repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Acer\Documents\Maven\Repository\AFPA\CDA03\demo\classesMetier\1.0-SNAPSHOT\classesMetier-1.0-SNAPSHOT.jar;C:\Users\Acer\Documents\Maven\Repository\com\microsoft\sqlserver\mssql-jdbc\8.1.1.jre8-preview\mssql-jdbc-8.1.1.jre8-preview.jar;C:\Users\Acer\Documents\Maven\Repository\mysql\mysql-connector-java\5.1.23\mysql-connector-java-5.1.23.jar;"/>
+    <property name="java.class.path" value="C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX\target\test-classes;C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX\target\classes;C:\Users\Sylvie\Documents\Maven\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Sylvie\Documents\Maven\repository\com\microsoft\sqlserver\mssql-jdbc\8.1.1.jre8-preview\mssql-jdbc-8.1.1.jre8-preview.jar;C:\Users\Sylvie\Documents\Maven\repository\mysql\mysql-connector-java\5.1.23\mysql-connector-java-5.1.23.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -18,41 +18,41 @@
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839\surefirebooter3894668439449208122.jar C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839 2020-01-20T21-45-17_985-jvmRun1 surefire2726378215871122268tmp surefire_04393466513050698029tmp"/>
-    <property name="surefire.test.class.path" value="C:\Users\Acer\Documents\Maven\Projets\projetFX\target\test-classes;C:\Users\Acer\Documents\Maven\Projets\projetFX\target\classes;C:\Users\Acer\Documents\Maven\Repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Acer\Documents\Maven\Repository\AFPA\CDA03\demo\classesMetier\1.0-SNAPSHOT\classesMetier-1.0-SNAPSHOT.jar;C:\Users\Acer\Documents\Maven\Repository\com\microsoft\sqlserver\mssql-jdbc\8.1.1.jre8-preview\mssql-jdbc-8.1.1.jre8-preview.jar;C:\Users\Acer\Documents\Maven\Repository\mysql\mysql-connector-java\5.1.23\mysql-connector-java-5.1.23.jar;"/>
+    <property name="sun.java.command" value="C:\Users\Sylvie\AppData\Local\Temp\surefire424541876628931110\surefirebooter5132809832282864904.jar C:\Users\Sylvie\AppData\Local\Temp\surefire424541876628931110 2020-01-21T17-08-35_881-jvmRun1 surefire3839491059546803806tmp surefire_0596517450453767102tmp"/>
+    <property name="surefire.test.class.path" value="C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX\target\test-classes;C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX\target\classes;C:\Users\Sylvie\Documents\Maven\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\Sylvie\Documents\Maven\repository\com\microsoft\sqlserver\mssql-jdbc\8.1.1.jre8-preview\mssql-jdbc-8.1.1.jre8-preview.jar;C:\Users\Sylvie\Documents\Maven\repository\mysql\mysql-connector-java\5.1.23\mysql-connector-java-5.1.23.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="C:\Users\Acer"/>
+    <property name="user.home" value="C:\Users\Sylvie"/>
     <property name="user.language" value="fr"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_191\jre"/>
-    <property name="basedir" value="C:\Users\Acer\Documents\Maven\Projets\projetFX"/>
+    <property name="basedir" value="C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX"/>
     <property name="file.separator" value="\"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Acer\AppData\Local\Temp\surefire642268887548327839\surefirebooter3894668439449208122.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Sylvie\AppData\Local\Temp\surefire424541876628931110\surefirebooter5132809832282864904.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_191\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_191\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_191-b12"/>
-    <property name="user.name" value="Acer"/>
+    <property name="user.name" value="Sylvie"/>
     <property name="path.separator" value=";"/>
     <property name="os.version" value="10.0"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_191\jre\lib\endorsed"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="file.encoding" value="Cp1252"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
-    <property name="localRepository" value="C:\Users\Acer\Documents\Maven\Repository"/>
+    <property name="localRepository" value="C:\Users\Sylvie\Documents\Maven\repository"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="C:\Users\Acer\AppData\Local\Temp\"/>
+    <property name="java.io.tmpdir" value="C:\Users\Sylvie\AppData\Local\Temp\"/>
     <property name="java.version" value="1.8.0_191"/>
-    <property name="user.dir" value="C:\Users\Acer\Documents\Maven\Projets\projetFX"/>
+    <property name="user.dir" value="C:\Users\Sylvie\Documents\Maven\projets\projetFX\projetFX"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\cmder\bin;C:\cmder\vendor\bin;C:\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\cmder\vendor\conemu-maximus5;C:\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files\doxygen\bin;C:\Program Files\Git\cmd;C:\wamp64\bin\php\php7.2.10;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;c:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;c:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\apache-maven-3.6.3\bin;C:\Users\Acer\AppData\Local\Microsoft\WindowsApps;C:\Users\Acer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Acer\AppData\Roaming\Composer\vendor\bin;C:\Users\Acer\AppData\Roaming\npm;C:\WINDOWS\system32\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\cmder;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\cmder\bin;C:\cmder\vendor\bin;C:\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\cmder\vendor\conemu-maximus5;C:\cmder\vendor\conemu-maximus5\ConEmu;C:\Python37\Scripts\;C:\Python37\;C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\ProgramData\ComposerSetup\bin;C:\wamp64\bin\php\php7.2.10;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\ProgramData\chocolatey\bin;C:\opt\apache_maven\bin;C:\Program Files\Pandoc\;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk1.8.0_191\bin;C:\Program Files\apache-maven-3.6.3\bin;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\150\DTS\Binn\;C:\Users\Sylvie\AppData\Local\Microsoft\WindowsApps;C:\Users\Sylvie\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Sylvie\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\cmder;."/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.version" value="25.191-b12"/>

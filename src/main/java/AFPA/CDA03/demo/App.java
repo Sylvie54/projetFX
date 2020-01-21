@@ -2,10 +2,6 @@ package AFPA.CDA03.demo;
 
 import controller.PersonEditDialogController;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import metier.classes.*;
+//import metier.classes.*;
 import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
+import DAO.*;
+
 //import metier.exceptions.*;
 
 /**
@@ -34,54 +32,19 @@ public class App extends Application
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
-         //           System.out.println( client.getIdSociete() + " nom societe :  "+ client.getRsSociete()) ;
-//        String driver ="com.microsoft.sqlserver.jdbc.SQLSERVERDRIVER"; 
-        ResultSet Resultat=null;
-        Connection conn = null;
-        String mysqlUser = "root";
-        String mysqlPassword = "";
-        String connexionString = "jdbc:mysql://localhost/filrouge_active?"; 
-        try {
-        Class.forName("com.mysql.jdbc.Driver" );
-       
-        conn = DriverManager.getConnection(connexionString, mysqlUser, mysqlPassword);  
-     //   conn = DriverManager.getConnection(connexionString);
-        Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
-           Resultat = stm.executeQuery("SELECT *  FROM client"); 
-           while (Resultat.next())
-            {
-      //        System.out.println(Resultat.getString("RSCLIENT"));
-                Person person = new Person(Resultat.getString("RSCLIENT"), Resultat.getString("ADRCLIENT"));
-                personData.add(person);
-            }
-//           for (Person person : getPersonData()) {
-//               System.out.println("lect : " + person.getFirstName());
-//        }
-           
-        }
-        catch ( ClassNotFoundException e )
-        {
-            System.out.println("pb class forname");
-            e.printStackTrace();
-            
-        }
-        catch ( Exception e )
-        {
-            System.out.println("pb connexion");
-            e.printStackTrace();
-        }
+        BaseSQLServer.AccesBase();
+        BaseSQLServer.selectAll();
         
         initRootLayout();
 
         showPersonOverview();
-        
-        
-
-        
     }
     public static ObservableList<Person> getPersonData() {
             return personData;
+    }
+    public static void ajouterPersonne(Person person) {
+        personData.add(person);
     }
     /**
      * Initializes the root layout.

@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.Person;
 import util.DateUtil;
+import DAO.BaseSQLServer;
 
 public class PersonOverviewController {
     @FXML
@@ -136,6 +137,7 @@ private void handleNewPerson() {
     boolean okClicked = app.showPersonEditDialog(tempPerson);
     if (okClicked) {
         App.getPersonData().add(tempPerson);
+        BaseSQLServer.insert(tempPerson);
     }
 }
 
@@ -147,10 +149,12 @@ private void handleNewPerson() {
 private void handleEditPerson() {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
+        String ancNom = selectedPerson.getFirstName();
         App app = new App();
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
+            BaseSQLServer.update(selectedPerson, ancNom);
         }
 
     } else {
