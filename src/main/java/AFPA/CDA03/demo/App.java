@@ -10,13 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-//import metier.classes.*;
 import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
 import javax.swing.JOptionPane;
-
+//import metier.classes.*;
 //import metier.exceptions.*;
 
 /**
@@ -42,6 +41,11 @@ public class App extends Application
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
+        // sortie del'application par la croix du borderPane
+        this.primaryStage.setOnCloseRequest(event ->
+        {
+            System.exit(0);
+        });        
         String saisie = JOptionPane.showInputDialog(null, "mysql ou sqlserver");
         choix = Integer.parseInt(saisie);
         if (choix == 1)
@@ -103,10 +107,8 @@ public class App extends Application
             rootLayout.setCenter(personOverview);
             
              // Give the controller access to the main app.
-             
-   
-        PersonOverviewController controller = loader.getController();
-        controller.setMainApp(this);
+            PersonOverviewController controller = loader.getController();
+            controller.setMainApp(this);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,6 +143,11 @@ public class App extends Application
             dialogStage.setTitle("Edit Person");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
+            // sortie del'application par la croix du borderPane
+            dialogStage.setOnCloseRequest(event ->
+            {
+                System.exit(0);
+            });    
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             // Set the person into the controller.

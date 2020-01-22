@@ -62,11 +62,11 @@ public class PersonOverviewController {
        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
        
        // Clear person details.
-    showPersonDetails(null);
+        showPersonDetails(null);
 
-    // Listen for selection changes and show the person details when changed.
-    personTable.getSelectionModel().selectedItemProperty().addListener(
-            (observable, oldValue, newValue) -> showPersonDetails(newValue));
+        // Listen for selection changes and show the person details when changed.
+        personTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
     /**
@@ -118,6 +118,10 @@ public class PersonOverviewController {
             if (App.getChoix() == 1) {
                 BaseMySQL.delete(selectedPerson);
             }
+            else {
+                BaseSQLServer.delete(selectedPerson);
+            }
+                
         }
         else {
            // Nothing selected.
@@ -145,7 +149,7 @@ private void handleNewPerson() {
             BaseMySQL.insert(tempPerson);
         }
         else {
-        BaseSQLServer.insert(tempPerson);
+            BaseSQLServer.insert(tempPerson);
         }
     }
 }
@@ -167,7 +171,7 @@ private void handleEditPerson() {
                 BaseMySQL.update(selectedPerson, ancNom);
             }
             else {
-            BaseSQLServer.update(selectedPerson, ancNom);
+                BaseSQLServer.update(selectedPerson, ancNom);
             }
         }
 
