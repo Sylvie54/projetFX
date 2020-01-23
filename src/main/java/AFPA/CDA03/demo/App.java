@@ -46,18 +46,15 @@ public class App extends Application
         {
             System.exit(0);
         });        
-        String saisie = JOptionPane.showInputDialog(null, "mysql ou sqlserver");
-        choix = Integer.parseInt(saisie);
-        if (choix == 1)
-        {
-            BaseMySQL.AccesBase();
-            BaseMySQL.selectAll();
-        }
-        else
-        {    
-            BaseSQLServer.AccesBase();
+        try {
+            Connexion.AccesBase();
             BaseSQLServer.selectAll();
         }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "un probleme est survenu");
+            e.printStackTrace();
+        }
+        
         initRootLayout();
 
         showPersonOverview();
@@ -161,6 +158,10 @@ public class App extends Application
             return controller.isOkClicked();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
     }

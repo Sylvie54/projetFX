@@ -22,43 +22,13 @@ import model.Person;
  * @author Sylvie
  */
 public class BaseSQLServer {
-   private static Connection conn = null;
+   private static Connection conn = Connexion.getConn();
    private static ResultSet Resultat = null;
    
    /**
-    * méthode d'accès à la base
-    */
-   public static void AccesBase() {
-        
-        try {
-            
-            final Properties prop = new Properties();
-            prop.load(BaseMySQL.class.getClassLoader().getResourceAsStream("dataBase.properties"));
-            String driver =(prop.getProperty("sgbd.driver"));        
-            String mysqlUser = prop.getProperty("sgbd.login");
-            String mysqlPassword = prop.getProperty("sgbd.password");
-            String connexionString = prop.getProperty("sgbd.connexionString"); 
-            System.out.println("driver : " + prop.getProperty("sgbd.driver"));
-            Class.forName(driver);
-            conn = DriverManager.getConnection(connexionString, mysqlUser, mysqlPassword);  
-        }    
-        catch ( ClassNotFoundException e )
-        {
-            System.out.println("pb class forname");
-            e.printStackTrace();
-            
-        }
-        catch ( Exception e )
-        {
-            System.out.println("pb connexion");
-            e.printStackTrace();
-        }
-        
-    }
-   /**
     * méthode de sélection de toutes les personnes
     */
-    public static void selectAll() {
+    public static void selectAll() throws Exception {
         try {
                 Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
@@ -73,8 +43,13 @@ public class BaseSQLServer {
         catch ( Exception e )
         {
             System.out.println("pb connexion");
+            Resultat.close();
             e.printStackTrace();
         }
+        finally {
+            Resultat.close();
+        }
+        
     }
     /**
      * méthode d'insertion d'une personne

@@ -110,18 +110,18 @@ public class PersonOverviewController {
         System.exit(0);
     }
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeletePerson() throws Exception {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
-            if (App.getChoix() == 1) {
-                BaseMySQL.delete(selectedPerson);
-            }
-            else {
+            try {
                 BaseSQLServer.delete(selectedPerson);
             }
-                
+            catch (Exception e)
+            {
+                throw (new Exception ("pb delete personne"));
+            }    
         }
         else {
            // Nothing selected.
@@ -139,18 +139,19 @@ public class PersonOverviewController {
  * details for a new person.
  */
 @FXML
-private void handleNewPerson() {
+private void handleNewPerson() throws Exception {
     Person tempPerson = new Person();
     App app = new App();
     boolean okClicked = app.showPersonEditDialog(tempPerson);
     if (okClicked) {
         App.getPersonData().add(tempPerson);
-        if (App.getChoix() == 1) {
-            BaseMySQL.insert(tempPerson);
-        }
-        else {
+        try {
             BaseSQLServer.insert(tempPerson);
         }
+        catch (Exception e)
+        {
+            throw (new Exception ("pb création personne"));
+        }  
     }
 }
 
@@ -159,7 +160,7 @@ private void handleNewPerson() {
  * details for the selected person.
  */
 @FXML
-private void handleEditPerson() {
+private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
         String ancNom = selectedPerson.getFirstName();
@@ -167,12 +168,14 @@ private void handleEditPerson() {
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
-            if (App.getChoix() == 1) {
-                BaseMySQL.update(selectedPerson, ancNom);
-            }
-            else {
-                BaseSQLServer.update(selectedPerson, ancNom);
-            }
+            try {
+            BaseSQLServer.update(selectedPerson, ancNom);
+        }
+            
+            catch (Exception e)
+            {
+                throw (new Exception ("pb delete personne"));
+            } 
         }
 
     } else {
