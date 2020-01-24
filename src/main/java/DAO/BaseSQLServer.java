@@ -6,15 +6,12 @@
 package DAO;
 
 import AFPA.CDA03.demo.App;
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
+import model.ExceptionsModele;
 import model.Person;
 
 /**
@@ -43,8 +40,8 @@ public class BaseSQLServer {
         catch ( Exception e )
         {
             System.out.println("pb connexion");
-            Resultat.close();
             e.printStackTrace();
+            throw (new ExceptionsModele ("problème de base")); 
         }
         finally {
             Resultat.close();
@@ -55,7 +52,7 @@ public class BaseSQLServer {
      * méthode d'insertion d'une personne
      * @param person Person
      */
-    public static void insert(Person person) {
+    public static void insert(Person person) throws Exception {
         String query = "INSERT INTO client ("
                 + " nom,"
                 + " prenom) VALUES ("
@@ -76,7 +73,7 @@ public class BaseSQLServer {
      * @param person Person
      * @param ancNom String ancien nom de la personne
      */
-    public static void update(Person person, String ancNom) {
+    public static void update(Person person, String ancNom) throws Exception {
         String query = "UPDATE client "
                 + "SET nom = ? "
                 + ", prenom = ? "
@@ -97,7 +94,7 @@ public class BaseSQLServer {
      * méthode de supression d' une personne
      * @param person Person
      */
-    public static void delete(Person person) {
+    public static void delete(Person person) throws Exception {
         String query = "DELETE FROM client WHERE nom = ? ";
         try(PreparedStatement pstatement = conn.prepareStatement(query)){
            

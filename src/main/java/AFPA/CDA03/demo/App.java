@@ -14,7 +14,10 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import utilitaires.Alertes;
+import model.ExceptionsModele;
 //import metier.classes.*;
 //import metier.exceptions.*;
 
@@ -26,14 +29,6 @@ public class App extends Application
 {
     private static int choix;
     private static Stage primaryStage;
-
-    public static int getChoix() {
-        return choix;
-    }
-
-    public static void setChoix(int aChoix) {
-        choix = aChoix;
-    }
     private BorderPane rootLayout;
     private static ObservableList<Person> personData = FXCollections.observableArrayList();
 
@@ -45,15 +40,7 @@ public class App extends Application
         this.primaryStage.setOnCloseRequest(event ->
         {
             System.exit(0);
-        });        
-        try {
-            Connexion.AccesBase();
-            BaseSQLServer.selectAll();
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "un probleme est survenu");
-            e.printStackTrace();
-        }
+        });  
         
         initRootLayout();
 
@@ -70,6 +57,7 @@ public class App extends Application
      */
     public void initRootLayout() {
         try {
+            
             // Load root layout from fxml file.
             
             FXMLLoader loader = new FXMLLoader();
@@ -81,8 +69,28 @@ public class App extends Application
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e) {
+            // accès base de données
+            Connexion.AccesBase();
+            BaseSQLServer.selectAll();
+            
+        }
+        catch (ExceptionsModele em) {
+            Alertes.alerte(primaryStage, em.getMessage());
+        }
+        catch (IOException e) {
+            Alertes.alerte(primaryStage, "un problème de fichier FXML est survenu");
             e.printStackTrace();
+            System.exit(0);
+        }
+        catch (SQLException sqle) {
+            Alertes.alerte(primaryStage, "un problème de base de données est survenu");
+            sqle.printStackTrace();
+            System.exit(0);
+        }
+        catch (Exception e) {
+            Alertes.alerte(primaryStage, "un problème est survenu");
+            e.printStackTrace();
+            System.exit(0);
         }
     }
 

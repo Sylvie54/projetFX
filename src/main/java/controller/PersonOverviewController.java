@@ -19,6 +19,9 @@ import javafx.scene.control.Alert.AlertType;
 import model.Person;
 import util.DateUtil;
 import DAO.*;
+import java.util.Optional;
+import javafx.scene.control.ButtonType;
+import model.ExceptionsModele;
 
 public class PersonOverviewController {
     @FXML
@@ -114,14 +117,22 @@ public class PersonOverviewController {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            personTable.getItems().remove(selectedIndex);
-            try {
-                BaseSQLServer.delete(selectedPerson);
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.initOwner(App.getPrimaryStage());
+            alert.setTitle("Suppression");
+            alert.setHeaderText("Confirmation de suppression");
+            alert.setContentText("Etes vous sûr de vouloir supprimer cette personne ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                personTable.getItems().remove(selectedIndex);
+                try {
+                    BaseSQLServer.delete(selectedPerson);
+                }
+                catch (Exception e)
+                {
+                    throw (new Exception ("pb delete personne"));
+                }
             }
-            catch (Exception e)
-            {
-                throw (new Exception ("pb delete personne"));
-            }    
         }
         else {
            // Nothing selected.
@@ -145,13 +156,7 @@ private void handleNewPerson() throws Exception {
     boolean okClicked = app.showPersonEditDialog(tempPerson);
     if (okClicked) {
         App.getPersonData().add(tempPerson);
-        try {
-            BaseSQLServer.insert(tempPerson);
-        }
-        catch (Exception e)
-        {
-            throw (new Exception ("pb création personne"));
-        }  
+        BaseSQLServer.insert(tempPerson);
     }
 }
 
@@ -168,14 +173,7 @@ private void handleEditPerson() throws Exception {
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
-            try {
             BaseSQLServer.update(selectedPerson, ancNom);
-        }
-            
-            catch (Exception e)
-            {
-                throw (new Exception ("pb delete personne"));
-            } 
         }
 
     } else {

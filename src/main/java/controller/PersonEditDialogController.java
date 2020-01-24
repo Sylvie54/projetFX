@@ -10,8 +10,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.ExceptionsModele;
 import model.Person;
 import util.DateUtil;
+//import utilitaires.Alertes;
 
 /**
  *
@@ -77,7 +79,7 @@ public class PersonEditDialogController {
     }
     
     @FXML
-    private void handleOk() {
+    private void handleOk() throws ExceptionsModele {
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
@@ -151,7 +153,6 @@ public class PersonEditDialogController {
             alert.setContentText(errorMessage);
 
             alert.showAndWait();
-
             return false;
         }
     }

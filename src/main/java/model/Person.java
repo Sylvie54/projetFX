@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.ExceptionsModele;
 
 /**
  * Model class for a Person.
@@ -35,7 +36,7 @@ public class Person {
     /**
      * Default constructor.
      */
-    public Person() {
+    public Person() throws Exception {
         this(null, null);
     }
     
@@ -45,8 +46,12 @@ public class Person {
      * @param firstName
      * @param lastName
      */
-    public Person(String firstName, String lastName) {
+    public Person(String firstName, String lastName) throws Exception {
+//        if (firstName.length() < 2) {
+//            throw (new Exception("constructeur : Longueur du nom inférieur à 2"));
+//        }
         this.firstName = new SimpleStringProperty(firstName);
+        
         this.lastName = new SimpleStringProperty(lastName);
         
         // Some initial dummy data, just for convenient testing.
@@ -60,7 +65,10 @@ public class Person {
         return firstName.get();
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName)  {
+//        if (firstName.length() < 2){
+//            throw (new Exception("Longueur du nom inférieur à 2"));
+//        }
         this.firstName.set(firstName);
     }
     
