@@ -19,8 +19,9 @@ import util.DateUtil;
  *
  * @author Acer
  */
-public class PersonEditDialogController {
-  @FXML
+public class PersonEditDialogController  {
+    
+    @FXML
     private TextField firstNameField;
     @FXML
     private TextField lastNameField;
@@ -79,7 +80,7 @@ public class PersonEditDialogController {
     }
     
     @FXML
-    private void handleOk() throws ExceptionsModele {
+    private void handleOk() throws Exception {
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());

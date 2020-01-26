@@ -9,6 +9,7 @@ package model;
  *
  * @author Acer
  */
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 
 import javafx.beans.property.IntegerProperty;
@@ -35,8 +36,9 @@ public class Person {
 
     /**
      * Default constructor.
+     * 
      */
-    public Person() throws Exception {
+    public Person() throws Exception   {
         this(null, null);
     }
     
@@ -45,11 +47,16 @@ public class Person {
      * 
      * @param firstName
      * @param lastName
+     * @throws java.lang.Exception
+     * 
      */
-    public Person(String firstName, String lastName) throws Exception {
-//        if (firstName.length() < 2) {
-//            throw (new Exception("constructeur : Longueur du nom inférieur à 2"));
-//        }
+    public Person(String firstName, String lastName) throws Exception  {
+     
+        if ((firstName == null) || firstName.length() <2 ) {
+              System.out.println(" constructeur :Longueur du nom inférieure à 2");
+        //      throw (new Exception("constructeur : Long du nom inférieure à 2"));
+        }
+       
         this.firstName = new SimpleStringProperty(firstName);
         
         this.lastName = new SimpleStringProperty(lastName);
@@ -65,10 +72,22 @@ public class Person {
         return firstName.get();
     }
 
-    public void setFirstName(String firstName)  {
-//        if (firstName.length() < 2){
-//            throw (new Exception("Longueur du nom inférieur à 2"));
+    public void setFirstName(String firstName) throws Exception  {
+     try {  
+        if ((firstName == null) || firstName.length() <2 )  {
+            System.out.println(" setter :Longueur du nom inférieure à 2");
+       // throw (new Exception("setter : Long du nom inférieure à 2"));
+       } 
+       
+     }
+//    catch (final InvocationTargetException ite) {
+//            final Throwable cause = ite.getTargetException();
+//            System.out.println("target : " + cause);
 //        }
+
+    catch (Exception e) {
+        System.out.println("catch  setter parse" + e.getMessage());
+    }
         this.firstName.set(firstName);
     }
     

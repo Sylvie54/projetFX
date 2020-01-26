@@ -34,6 +34,7 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) {
+        try {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("AddressApp");
         // sortie del'application par la croix du borderPane
@@ -45,6 +46,26 @@ public class App extends Application
         initRootLayout();
 
         showPersonOverview();
+        }
+        catch (ExceptionsModele em) {
+            Alertes.alerte(primaryStage, em.getMessage());
+        }
+        catch (IOException e) {
+            Alertes.alerte(primaryStage, "un problème de fichier FXML est survenu");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        catch (SQLException sqle) {
+            Alertes.alerte(primaryStage, "un problème de base de données est survenu");
+            sqle.printStackTrace();
+            System.exit(0);
+        
+        }
+        catch (Exception e) {
+          Alertes.alerte(primaryStage, "un problème est survenu");
+            e.printStackTrace();
+            System.exit(0);
+    }
     }
     public static ObservableList<Person> getPersonData() {
             return personData;
@@ -55,9 +76,8 @@ public class App extends Application
     /**
      * Initializes the root layout.
      */
-    public void initRootLayout() {
-        try {
-            
+    public void initRootLayout() throws Exception {
+       
             // Load root layout from fxml file.
             
             FXMLLoader loader = new FXMLLoader();
@@ -73,34 +93,16 @@ public class App extends Application
             Connexion.AccesBase();
             BaseSQLServer.selectAll();
             
-        }
-        catch (ExceptionsModele em) {
-            Alertes.alerte(primaryStage, em.getMessage());
-        }
-        catch (IOException e) {
-            Alertes.alerte(primaryStage, "un problème de fichier FXML est survenu");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        catch (SQLException sqle) {
-            Alertes.alerte(primaryStage, "un problème de base de données est survenu");
-            sqle.printStackTrace();
-            System.exit(0);
-        }
-        catch (Exception e) {
-            Alertes.alerte(primaryStage, "un problème est survenu");
-            e.printStackTrace();
-            System.exit(0);
-        }
+        
     }
 
     /**
      * Shows the person overview inside the root layout.
+     * @throws java.lang.Exception
      */
-    public void showPersonOverview() {
-        try {
+    public void showPersonOverview() throws Exception, ExceptionInInitializerError {
+        
             // Load person overview.
-          
             FXMLLoader loader = new FXMLLoader();
             
             loader.setLocation(getClass().getClassLoader().getResource("PersonOverview.fxml"));
@@ -114,11 +116,9 @@ public class App extends Application
              // Give the controller access to the main app.
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
+        
+    
     
     /**
      * Returns the main stage.
@@ -134,8 +134,9 @@ public class App extends Application
      *
      * @param person the person object to be edited
      * @return true if the user clicked OK, false otherwise.
+     * @throws java.lang.Exception
      */
-    public boolean showPersonEditDialog(Person person) {
+    public boolean showPersonEditDialog(Person person) throws Exception,ExceptionInInitializerError {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -168,8 +169,9 @@ public class App extends Application
             e.printStackTrace();
             return false;
         }
+        
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            Alertes.alerte(primaryStage, e.getMessage());
             return false;
         }
     }

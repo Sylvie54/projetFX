@@ -121,7 +121,7 @@ public class PersonOverviewController {
             alert.initOwner(App.getPrimaryStage());
             alert.setTitle("Suppression");
             alert.setHeaderText("Confirmation de suppression");
-            alert.setContentText("Etes vous sûr de vouloir supprimer cette personne ?");
+            alert.setContentText("Etes vous sûr de vouloir sup cette personne ?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 personTable.getItems().remove(selectedIndex);
