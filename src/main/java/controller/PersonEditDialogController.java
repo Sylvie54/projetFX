@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.lang.reflect.InvocationTargetException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -80,7 +81,8 @@ public class PersonEditDialogController  {
     }
     
     @FXML
-    private void handleOk() throws Exception {
+    private void handleOk() throws Exception,  InvocationTargetException {
+        try {
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
             person.setLastName(lastNameField.getText());
@@ -91,6 +93,11 @@ public class PersonEditDialogController  {
 
             okClicked = true;
             dialogStage.close();
+        }
+        }
+        catch (InvocationTargetException ie) {
+            System.out.println("handleOk okclicked false");
+            okClicked = false;
         }
     } 
     

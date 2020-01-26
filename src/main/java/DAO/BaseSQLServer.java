@@ -41,7 +41,7 @@ public class BaseSQLServer {
         {
             System.out.println("pb connexion");
             e.printStackTrace();
-            throw (new ExceptionsModele ("problème de base")); 
+            throw (new Exception ("problème de base")); 
         }
         finally {
             Resultat.close();

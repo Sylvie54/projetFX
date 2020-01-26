@@ -14,6 +14,7 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import utilitaires.Alertes;
@@ -61,11 +62,14 @@ public class App extends Application
             System.exit(0);
         
         }
+        catch ( InvocationTargetException ie) {
+            Alertes.alerte(primaryStage, "pb de saisie : " + ie.getMessage()); 
+        }
         catch (Exception e) {
           Alertes.alerte(primaryStage, "un problème est survenu");
             e.printStackTrace();
             System.exit(0);
-    }
+        }
     }
     public static ObservableList<Person> getPersonData() {
             return personData;
@@ -100,7 +104,7 @@ public class App extends Application
      * Shows the person overview inside the root layout.
      * @throws java.lang.Exception
      */
-    public void showPersonOverview() throws Exception, ExceptionInInitializerError {
+    public void showPersonOverview() throws Exception,  InvocationTargetException {
         
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -136,7 +140,7 @@ public class App extends Application
      * @return true if the user clicked OK, false otherwise.
      * @throws java.lang.Exception
      */
-    public boolean showPersonEditDialog(Person person) throws Exception,ExceptionInInitializerError {
+    public boolean showPersonEditDialog(Person person) throws Exception,InvocationTargetException  {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();

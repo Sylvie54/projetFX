@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.Person;
 import util.DateUtil;
 import DAO.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import javafx.scene.control.ButtonType;
 import model.ExceptionsModele;
@@ -150,13 +151,19 @@ public class PersonOverviewController {
  * details for a new person.
  */
 @FXML
-private void handleNewPerson() throws Exception {
+private void handleNewPerson() throws Exception,  InvocationTargetException {
+    try {
     Person tempPerson = new Person();
     App app = new App();
     boolean okClicked = app.showPersonEditDialog(tempPerson);
     if (okClicked) {
         App.getPersonData().add(tempPerson);
         BaseSQLServer.insert(tempPerson);
+    }
+    }
+    catch (InvocationTargetException ie) {
+    Throwable target = null;
+    throw (new InvocationTargetException(target, " exception handlenewperson throw setter long <2"));
     }
 }
 
@@ -165,7 +172,7 @@ private void handleNewPerson() throws Exception {
  * details for the selected person.
  */
 @FXML
-private void handleEditPerson() throws Exception {
+private void handleEditPerson() throws Exception,  InvocationTargetException {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
         String ancNom = selectedPerson.getFirstName();

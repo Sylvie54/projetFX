@@ -38,8 +38,10 @@ public class Person {
      * Default constructor.
      * 
      */
-    public Person() throws Exception   {
+    public Person() throws Exception,InvocationTargetException     {
         this(null, null);
+        Throwable target = null;
+        throw (new InvocationTargetException(target, "constructeur par default throw setter long <2")); 
     }
     
     /**
@@ -50,11 +52,16 @@ public class Person {
      * @throws java.lang.Exception
      * 
      */
-    public Person(String firstName, String lastName) throws Exception  {
-     
+    public Person(String firstName, String lastName) throws Exception,InvocationTargetException  {
+        try {
         if ((firstName == null) || firstName.length() <2 ) {
               System.out.println(" constructeur :Longueur du nom inférieure à 2");
-        //      throw (new Exception("constructeur : Long du nom inférieure à 2"));
+              Throwable target = null;
+              throw (new InvocationTargetException(target));
+        }
+        }
+        catch (Exception e) {
+        System.out.println("catch  constructeur parse" + e.getMessage());
         }
        
         this.firstName = new SimpleStringProperty(firstName);
@@ -66,16 +73,20 @@ public class Person {
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        
+        
     }
     
     public String getFirstName() {
         return firstName.get();
     }
 
-    public void setFirstName(String firstName) throws Exception  {
+    public void setFirstName(String firstName) throws Exception, InvocationTargetException  {
      try {  
         if ((firstName == null) || firstName.length() <2 )  {
             System.out.println(" setter :Longueur du nom inférieure à 2");
+            Throwable target = null;
+            throw (new InvocationTargetException(target, "throw setter long <2"));
        // throw (new Exception("setter : Long du nom inférieure à 2"));
        } 
        
