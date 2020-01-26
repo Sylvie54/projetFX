@@ -22,7 +22,9 @@ import DAO.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import javafx.scene.control.ButtonType;
+import javax.swing.JOptionPane;
 import model.ExceptionsModele;
+import utilitaires.Alertes;
 
 public class PersonOverviewController {
     @FXML
@@ -152,19 +154,16 @@ public class PersonOverviewController {
  */
 @FXML
 private void handleNewPerson() throws Exception,  InvocationTargetException {
-    try {
+    
     Person tempPerson = new Person();
+     
     App app = new App();
     boolean okClicked = app.showPersonEditDialog(tempPerson);
     if (okClicked) {
         App.getPersonData().add(tempPerson);
         BaseSQLServer.insert(tempPerson);
     }
-    }
-    catch (InvocationTargetException ie) {
-    Throwable target = null;
-    throw (new InvocationTargetException(target, " exception handlenewperson throw setter long <2"));
-    }
+    
 }
 
 /**
@@ -175,12 +174,19 @@ private void handleNewPerson() throws Exception,  InvocationTargetException {
 private void handleEditPerson() throws Exception,  InvocationTargetException {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
+        try {
         String ancNom = selectedPerson.getFirstName();
         App app = new App();
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancNom);
+        }
+        }
+        catch (Exception e) {
+//    Throwable target = null;
+//    throw (new InvocationTargetException(target, " exception handleeditperson throw setter long <2"));
+            System.out.println("handleedit person");  
         }
 
     } else {

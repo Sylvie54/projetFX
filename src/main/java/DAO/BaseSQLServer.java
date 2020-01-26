@@ -6,6 +6,7 @@
 package DAO;
 
 import AFPA.CDA03.demo.App;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class BaseSQLServer {
    /**
     * méthode de sélection de toutes les personnes
     */
-    public static void selectAll() throws Exception {
+    public static void selectAll() throws Exception, InvocationTargetException  {
         try {
                 Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
@@ -36,6 +37,10 @@ public class BaseSQLServer {
                     App.ajouterPersonne(person);
                 }
     
+        }
+        catch (InvocationTargetException ie) {
+            Throwable target = null;
+            throw (new InvocationTargetException(target, " exception selectall throw setter long <2"));
         }
         catch ( Exception e )
         {

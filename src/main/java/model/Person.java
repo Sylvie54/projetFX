@@ -40,8 +40,8 @@ public class Person {
      */
     public Person() throws Exception,InvocationTargetException     {
         this(null, null);
-        Throwable target = null;
-        throw (new InvocationTargetException(target, "constructeur par default throw setter long <2")); 
+//        Throwable target = null;
+//        throw (new InvocationTargetException(target, "constructeur par default throw setter long <2")); 
     }
     
     /**

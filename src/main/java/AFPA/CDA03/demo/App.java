@@ -80,10 +80,10 @@ public class App extends Application
     /**
      * Initializes the root layout.
      */
-    public void initRootLayout() throws Exception {
+    public void initRootLayout() throws Exception, InvocationTargetException {
        
             // Load root layout from fxml file.
-            
+            try {
             FXMLLoader loader = new FXMLLoader();
             
             loader.setLocation(getClass().getClassLoader().getResource("RootLayout.fxml"));
@@ -96,7 +96,11 @@ public class App extends Application
             // accès base de données
             Connexion.AccesBase();
             BaseSQLServer.selectAll();
-            
+            }
+            catch (InvocationTargetException ie) {
+                Throwable target = null;
+                throw (new InvocationTargetException(target, " exception initrootlayout"));
+            }
         
     }
 
@@ -174,9 +178,11 @@ public class App extends Application
             return false;
         }
         
-        catch (Exception e) {
-            Alertes.alerte(primaryStage, e.getMessage());
+        catch ( Exception e) {
+            e.printStackTrace();
             return false;
+            
+            
         }
     }
     public static void main( String[] args )
