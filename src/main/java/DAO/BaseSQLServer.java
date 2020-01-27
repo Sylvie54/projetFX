@@ -30,10 +30,11 @@ public class BaseSQLServer {
         try {
                 Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
-                Resultat = stm.executeQuery("SELECT *  FROM client"); 
+                Resultat = stm.executeQuery("SELECT *  FROM client");
+                Person person;
                 while (Resultat.next())
                 {
-                    Person person = new Person(Resultat.getString("nom"), Resultat.getString("prenom"));
+                    person = new Person(Resultat.getString("nom"), Resultat.getString("prenom"));
                     App.ajouterPersonne(person);
                 }
     

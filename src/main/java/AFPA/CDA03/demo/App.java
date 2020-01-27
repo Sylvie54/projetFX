@@ -109,7 +109,7 @@ public class App extends Application
      * @throws java.lang.Exception
      */
     public void showPersonOverview() throws Exception,  InvocationTargetException {
-        
+        try {
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
             
@@ -124,6 +124,10 @@ public class App extends Application
              // Give the controller access to the main app.
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
+        }
+        catch (Exception e) {
+            throw new Exception (e.getMessage());
+        }
         }
         
     

@@ -171,7 +171,7 @@ private void handleNewPerson() throws Exception,  InvocationTargetException {
  * details for the selected person.
  */
 @FXML
-private void handleEditPerson() throws Exception,  InvocationTargetException {
+private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
         try {
@@ -186,7 +186,9 @@ private void handleEditPerson() throws Exception,  InvocationTargetException {
         catch (Exception e) {
 //    Throwable target = null;
 //    throw (new InvocationTargetException(target, " exception handleeditperson throw setter long <2"));
-            System.out.println("handleedit person");  
+         System.out.println("handleedit person");
+         throw new Exception (" handleeditperson  " +e.getMessage());   
+         
         }
 
     } else {

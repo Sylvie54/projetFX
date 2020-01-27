@@ -95,7 +95,7 @@ public class PersonEditDialogController  {
             dialogStage.close();
         }
         }
-        catch (InvocationTargetException ie) {
+        catch (Exception ie) {
             System.out.println("handleOk okclicked false");
             okClicked = false;
         }

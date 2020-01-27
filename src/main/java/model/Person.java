@@ -57,7 +57,8 @@ public class Person {
         if ((firstName == null) || firstName.length() <2 ) {
               System.out.println(" constructeur :Longueur du nom inférieure à 2");
               Throwable target = null;
-              throw (new InvocationTargetException(target));
+          //    throw (new InvocationTargetException(target));
+            throw new Exception ("nom trop court");
         }
         }
         catch (Exception e) {
@@ -81,12 +82,13 @@ public class Person {
         return firstName.get();
     }
 
-    public void setFirstName(String firstName) throws Exception, InvocationTargetException  {
+    public void setFirstName(String firstName) throws Exception  {
      try {  
         if ((firstName == null) || firstName.length() <2 )  {
             System.out.println(" setter :Longueur du nom inférieure à 2");
             Throwable target = null;
-            throw (new InvocationTargetException(target, "throw setter long <2"));
+         //   throw (new InvocationTargetException(target, "throw setter long <2"));
+          throw new Exception ("nom trop court");
        // throw (new Exception("setter : Long du nom inférieure à 2"));
        } 
        
