@@ -26,7 +26,6 @@ import model.ExceptionsModele;
  * @author Marco Jakob
  */
 public class Person {
-
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty street;
@@ -38,7 +37,7 @@ public class Person {
      * Default constructor.
      * 
      */
-    public Person() throws Exception,InvocationTargetException     {
+    public Person() throws Exception     {
         this(null, null);
 //        Throwable target = null;
 //        throw (new InvocationTargetException(target, "constructeur par default throw setter long <2")); 
@@ -52,18 +51,15 @@ public class Person {
      * @throws java.lang.Exception
      * 
      */
-    public Person(String firstName, String lastName) throws Exception,InvocationTargetException  {
-        try {
-        if ((firstName == null) || firstName.length() <2 ) {
+    public Person(String firstName, String lastName) throws Exception  {
+        
+        if (firstName != null && firstName.length() <2 ) {
               System.out.println(" constructeur :Longueur du nom inférieure à 2");
-              Throwable target = null;
+           //   Throwable target = null;
           //    throw (new InvocationTargetException(target));
             throw new Exception ("nom trop court");
         }
-        }
-        catch (Exception e) {
-        System.out.println("catch  constructeur parse" + e.getMessage());
-        }
+        
        
         this.firstName = new SimpleStringProperty(firstName);
         
@@ -83,8 +79,8 @@ public class Person {
     }
 
     public void setFirstName(String firstName) throws Exception  {
-     try {  
-        if ((firstName == null) || firstName.length() <2 )  {
+      
+        if ((firstName != null) && firstName.length() <2 )  {
             System.out.println(" setter :Longueur du nom inférieure à 2");
             Throwable target = null;
          //   throw (new InvocationTargetException(target, "throw setter long <2"));
@@ -92,15 +88,13 @@ public class Person {
        // throw (new Exception("setter : Long du nom inférieure à 2"));
        } 
        
-     }
+     
 //    catch (final InvocationTargetException ite) {
 //            final Throwable cause = ite.getTargetException();
 //            System.out.println("target : " + cause);
 //        }
 
-    catch (Exception e) {
-        System.out.println("catch  setter parse" + e.getMessage());
-    }
+    
         this.firstName.set(firstName);
     }
     

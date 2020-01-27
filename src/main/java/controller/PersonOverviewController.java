@@ -153,8 +153,8 @@ public class PersonOverviewController {
  * details for a new person.
  */
 @FXML
-private void handleNewPerson() throws Exception,  InvocationTargetException {
-    
+private void handleNewPerson()  {
+    try {
     Person tempPerson = new Person();
      
     App app = new App();
@@ -163,7 +163,10 @@ private void handleNewPerson() throws Exception,  InvocationTargetException {
         App.getPersonData().add(tempPerson);
         BaseSQLServer.insert(tempPerson);
     }
-    
+    }
+    catch (Exception e) {
+        e.printStackTrace();
+    }
 }
 
 /**
@@ -174,7 +177,7 @@ private void handleNewPerson() throws Exception,  InvocationTargetException {
 private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
-        try {
+        
         String ancNom = selectedPerson.getFirstName();
         App app = new App();
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
@@ -182,14 +185,9 @@ private void handleEditPerson() throws Exception {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancNom);
         }
-        }
-        catch (Exception e) {
-//    Throwable target = null;
-//    throw (new InvocationTargetException(target, " exception handleeditperson throw setter long <2"));
-         System.out.println("handleedit person");
-         throw new Exception (" handleeditperson  " +e.getMessage());   
-         
-        }
+        
+        
+    
 
     } else {
         // Nothing selected.

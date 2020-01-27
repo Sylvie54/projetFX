@@ -5,6 +5,7 @@
  */
 package controller;
 
+import AFPA.CDA03.demo.App;
 import java.lang.reflect.InvocationTargetException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -81,7 +82,7 @@ public class PersonEditDialogController  {
     }
     
     @FXML
-    private void handleOk() throws Exception,  InvocationTargetException {
+    private void handleOk() throws Exception {
         try {
         if (isInputValid()) {
             person.setFirstName(firstNameField.getText());
@@ -97,6 +98,13 @@ public class PersonEditDialogController  {
         }
         catch (Exception ie) {
             System.out.println("handleOk okclicked false");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(App.getPrimaryStage());
+            alert.setTitle("erreur saisie");
+            alert.setHeaderText("");
+            alert.setContentText("nom trop court");
+
+        alert.showAndWait();
             okClicked = false;
         }
     } 

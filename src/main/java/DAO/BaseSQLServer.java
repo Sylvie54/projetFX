@@ -26,7 +26,7 @@ public class BaseSQLServer {
    /**
     * méthode de sélection de toutes les personnes
     */
-    public static void selectAll() throws Exception, InvocationTargetException  {
+    public static void selectAll() throws Exception{
         try {
                 Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
@@ -39,10 +39,10 @@ public class BaseSQLServer {
                 }
     
         }
-        catch (InvocationTargetException ie) {
-            Throwable target = null;
-            throw (new InvocationTargetException(target, " exception selectall throw setter long <2"));
-        }
+//        catch (InvocationTargetException ie) {
+//            Throwable target = null;
+//            throw (new InvocationTargetException(target, " exception selectall throw setter long <2"));
+//        }
         catch ( Exception e )
         {
             System.out.println("pb connexion");

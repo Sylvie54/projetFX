@@ -148,7 +148,7 @@ public class App extends Application
      * @return true if the user clicked OK, false otherwise.
      * @throws java.lang.Exception
      */
-    public boolean showPersonEditDialog(Person person) throws Exception,InvocationTargetException  {
+    public boolean showPersonEditDialog(Person person) throws Exception  {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -184,6 +184,7 @@ public class App extends Application
         
         catch ( Exception e) {
             e.printStackTrace();
+            System.out.println("app.showpersoneditdialog");
             return false;
             
             
