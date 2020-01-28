@@ -39,15 +39,9 @@ public class BaseSQLServer {
                 }
     
         }
-//        catch (InvocationTargetException ie) {
-//            Throwable target = null;
-//            throw (new InvocationTargetException(target, " exception selectall throw setter long <2"));
-//        }
         catch ( Exception e )
         {
-            System.out.println("pb connexion");
-            e.printStackTrace();
-            throw (new Exception ("problème de base")); 
+            throw new Exception (e.getMessage());
         }
         finally {
             Resultat.close();
@@ -71,7 +65,7 @@ public class BaseSQLServer {
             //  Execution du PreparedStatement pour insertion
             pstatement.executeUpdate();
         }catch(SQLException SQLex){
-            System.out.println(SQLex.getMessage());
+            SQLex.printStackTrace();
         }
     }
     /**
@@ -85,7 +79,6 @@ public class BaseSQLServer {
                 + ", prenom = ? "
                 + "WHERE nom = ? ";
         try(PreparedStatement pstatement = conn.prepareStatement(query)){
-            System.out.println("********     " + person.getFirstName()+ " " +ancNom+  "  *****************");
             //  Recuperation des parametres pour le PreparedStatement
             pstatement.setString(1, person.getFirstName());
             pstatement.setString(2, person.getLastName());
@@ -93,7 +86,7 @@ public class BaseSQLServer {
             //  Execution du PreparedStatement pour modif
             pstatement.executeUpdate();
         }catch(SQLException SQLex){
-            System.out.println(SQLex.getMessage());
+            SQLex.printStackTrace();
         }
     }
     /**
@@ -109,7 +102,7 @@ public class BaseSQLServer {
             //  Execution du PreparedStatement pour modif
             pstatement.executeUpdate();
         }catch(SQLException SQLex){
-            System.out.println(SQLex.getMessage());
+            SQLex.printStackTrace();
         }
     }
  

@@ -19,10 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import model.Person;
 import util.DateUtil;
 import DAO.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 import javafx.scene.control.ButtonType;
-import javax.swing.JOptionPane;
 import model.ExceptionsModele;
 import utilitaires.Alertes;
 
@@ -128,24 +126,18 @@ public class PersonOverviewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 personTable.getItems().remove(selectedIndex);
-                try {
-                    BaseSQLServer.delete(selectedPerson);
-                }
-                catch (Exception e)
-                {
-                    throw (new Exception ("pb delete personne"));
-                }
+                BaseSQLServer.delete(selectedPerson);
             }
         }
         else {
            // Nothing selected.
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.initOwner(App.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No Person Selected");
-        alert.setContentText("Please select a person in the table.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(App.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
 
-        alert.showAndWait(); 
+            alert.showAndWait(); 
         }
     }
     /**
@@ -153,8 +145,8 @@ public class PersonOverviewController {
  * details for a new person.
  */
 @FXML
-private void handleNewPerson()  {
-    try {
+private void handleNewPerson() throws Exception  {
+    
     Person tempPerson = new Person();
      
     App app = new App();
@@ -163,10 +155,7 @@ private void handleNewPerson()  {
         App.getPersonData().add(tempPerson);
         BaseSQLServer.insert(tempPerson);
     }
-    }
-    catch (Exception e) {
-        e.printStackTrace();
-    }
+    
 }
 
 /**
@@ -185,10 +174,6 @@ private void handleEditPerson() throws Exception {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancNom);
         }
-        
-        
-    
-
     } else {
         // Nothing selected.
         Alert alert = new Alert(AlertType.WARNING);
@@ -199,5 +184,5 @@ private void handleEditPerson() throws Exception {
 
         alert.showAndWait();
     }
-}
+    }
 }

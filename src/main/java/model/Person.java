@@ -39,8 +39,6 @@ public class Person {
      */
     public Person() throws Exception     {
         this(null, null);
-//        Throwable target = null;
-//        throw (new InvocationTargetException(target, "constructeur par default throw setter long <2")); 
     }
     
     /**
@@ -51,18 +49,13 @@ public class Person {
      * @throws java.lang.Exception
      * 
      */
-    public Person(String firstName, String lastName) throws Exception  {
+    public Person(String firstName, String lastName) throws ExceptionsModele  {
         
         if (firstName != null && firstName.length() <2 ) {
-              System.out.println(" constructeur :Longueur du nom inférieure à 2");
-           //   Throwable target = null;
-          //    throw (new InvocationTargetException(target));
-            throw new Exception ("nom trop court");
+            throw new ExceptionsModele("le nom doit faire au moins 2 caractères");
         }
-        
        
         this.firstName = new SimpleStringProperty(firstName);
-        
         this.lastName = new SimpleStringProperty(lastName);
         
         // Some initial dummy data, just for convenient testing.
@@ -78,24 +71,11 @@ public class Person {
         return firstName.get();
     }
 
-    public void setFirstName(String firstName) throws Exception  {
-      
+    public void setFirstName(String firstName) throws ExceptionsModele  {
         if ((firstName != null) && firstName.length() <2 )  {
-            System.out.println(" setter :Longueur du nom inférieure à 2");
-            Throwable target = null;
-         //   throw (new InvocationTargetException(target, "throw setter long <2"));
-          throw new Exception ("nom trop court");
-       // throw (new Exception("setter : Long du nom inférieure à 2"));
+            throw new ExceptionsModele("le nom doit faire au moins 2 caractères");
        } 
-       
-     
-//    catch (final InvocationTargetException ite) {
-//            final Throwable cause = ite.getTargetException();
-//            System.out.println("target : " + cause);
-//        }
-
-    
-        this.firstName.set(firstName);
+       this.firstName.set(firstName);
     }
     
     public StringProperty firstNameProperty() {

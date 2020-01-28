@@ -6,7 +6,6 @@
 package controller;
 
 import AFPA.CDA03.demo.App;
-import java.lang.reflect.InvocationTargetException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -96,13 +95,12 @@ public class PersonEditDialogController  {
             dialogStage.close();
         }
         }
-        catch (Exception ie) {
-            System.out.println("handleOk okclicked false");
+        catch (ExceptionsModele em) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(App.getPrimaryStage());
             alert.setTitle("erreur saisie");
             alert.setHeaderText("");
-            alert.setContentText("nom trop court");
+            alert.setContentText(em.getMessage());
 
         alert.showAndWait();
             okClicked = false;

@@ -14,21 +14,14 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
-import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import utilitaires.Alertes;
-import model.ExceptionsModele;
-//import metier.classes.*;
-//import metier.exceptions.*;
 
 /**
- * Hello world!
+ * classe App
  *
  */
 public class App extends Application
 {
-    private static int choix;
     private static Stage primaryStage;
     private BorderPane rootLayout;
     private static ObservableList<Person> personData = FXCollections.observableArrayList();
@@ -36,34 +29,17 @@ public class App extends Application
     @Override
     public void start(Stage primaryStage) {
         try {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("AddressApp");
-        // sortie del'application par la croix du borderPane
-        this.primaryStage.setOnCloseRequest(event ->
-        {
-            System.exit(0);
-        });  
-        
-        initRootLayout();
+            this.primaryStage = primaryStage;
+            this.primaryStage.setTitle("AddressApp");
+            // sortie del'application par la croix du borderPane
+            this.primaryStage.setOnCloseRequest(event ->
+            {
+                System.exit(0);
+            });  
 
-        showPersonOverview();
-        }
-        catch (ExceptionsModele em) {
-            Alertes.alerte(primaryStage, em.getMessage());
-        }
-        catch (IOException e) {
-            Alertes.alerte(primaryStage, "un problème de fichier FXML est survenu");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        catch (SQLException sqle) {
-            Alertes.alerte(primaryStage, "un problème de base de données est survenu");
-            sqle.printStackTrace();
-            System.exit(0);
-        
-        }
-        catch ( InvocationTargetException ie) {
-            Alertes.alerte(primaryStage, "pb de saisie : " + ie.getMessage()); 
+            initRootLayout();
+
+            showPersonOverview();
         }
         catch (Exception e) {
           Alertes.alerte(primaryStage, "un problème est survenu");
@@ -72,63 +48,55 @@ public class App extends Application
         }
     }
     public static ObservableList<Person> getPersonData() {
-            return personData;
+        return personData;
     }
+    
     public static void ajouterPersonne(Person person) {
         personData.add(person);
     }
     /**
      * Initializes the root layout.
      */
-    public void initRootLayout() throws Exception, InvocationTargetException {
+    public void initRootLayout() throws Exception {
        
-            // Load root layout from fxml file.
-            try {
-            FXMLLoader loader = new FXMLLoader();
+        // Load root layout from fxml file.
+
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getClassLoader().getResource("RootLayout.fxml"));
+        rootLayout = (BorderPane) loader.load();
+
+        // Show the scene containing the root layout.
+        Scene scene = new Scene(rootLayout);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        // accès base de données
+        Connexion.AccesBase();
+        BaseSQLServer.selectAll();
             
-            loader.setLocation(getClass().getClassLoader().getResource("RootLayout.fxml"));
-             rootLayout = (BorderPane) loader.load();
-            
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-            // accès base de données
-            Connexion.AccesBase();
-            BaseSQLServer.selectAll();
-            }
-            catch (InvocationTargetException ie) {
-                Throwable target = null;
-                throw (new InvocationTargetException(target, " exception initrootlayout"));
-            }
-        
     }
 
     /**
      * Shows the person overview inside the root layout.
      * @throws java.lang.Exception
      */
-    public void showPersonOverview() throws Exception,  InvocationTargetException {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            
-            loader.setLocation(getClass().getClassLoader().getResource("PersonOverview.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
-          
-        //    AnchorPane personOverview = loader.load(getClass().getClassLoader().getResource("PersonOverview.fxml"));
-            
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
-            
-             // Give the controller access to the main app.
-            PersonOverviewController controller = loader.getController();
-            controller.setMainApp(this);
-        }
-        catch (Exception e) {
-            throw new Exception (e.getMessage());
-        }
-        }
+    public void showPersonOverview() throws Exception {
+        
+        // Load person overview.
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(getClass().getClassLoader().getResource("PersonOverview.fxml"));
+        AnchorPane personOverview = (AnchorPane) loader.load();
+
+        // Set person overview into the center of root layout.
+        rootLayout.setCenter(personOverview);
+
+         // Give the controller access to the main app.
+        PersonOverviewController controller = loader.getController();
+        controller.setMainApp(this);
+    }
+        
+        
         
     
     
@@ -149,8 +117,7 @@ public class App extends Application
      * @throws java.lang.Exception
      */
     public boolean showPersonEditDialog(Person person) throws Exception  {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
+        try {            // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("PersonEditDialog.fxml"));
            
@@ -181,15 +148,8 @@ public class App extends Application
             e.printStackTrace();
             return false;
         }
-        
-        catch ( Exception e) {
-            e.printStackTrace();
-            System.out.println("app.showpersoneditdialog");
-            return false;
-            
-            
-        }
     }
+    
     public static void main( String[] args )
     {
          launch(args);

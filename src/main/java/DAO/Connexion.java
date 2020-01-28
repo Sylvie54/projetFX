@@ -8,22 +8,20 @@ package DAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Properties;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Acer
  */
 public class Connexion  {
-   // private static String saisie = JOptionPane.showInputDialog(null, "mysql ou sqlserver");
-  //  private static int choix = Integer.parseInt(saisie);
+  
     private static Connection conn = null;
     private static ResultSet Resultat = null;
    
@@ -59,11 +57,10 @@ public class Connexion  {
         }    
         catch ( ClassNotFoundException e )
         {
-            System.out.println("pb class forname");
             e.printStackTrace();
         }    
         catch (Exception e) {
-            System.out.println("pb connexion");
+            e.printStackTrace();
         }
         
     } 

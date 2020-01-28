@@ -6,7 +6,6 @@
 package utilitaires;
 
 import javafx.scene.control.Alert;
-import controller.PersonEditDialogController;
 import javafx.stage.Stage;
 
 /**
