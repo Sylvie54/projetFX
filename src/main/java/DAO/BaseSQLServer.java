@@ -74,6 +74,7 @@ public class BaseSQLServer {
      * @param ancNom String ancien nom de la personne
      */
     public static void update(Person person, String ancNom) throws Exception {
+        System.out.println(person.getFirstName() + " ancnom " + ancNom);
         String query = "UPDATE client "
                 + "SET nom = ? "
                 + ", prenom = ? "

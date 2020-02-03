@@ -131,13 +131,7 @@ public class PersonOverviewController {
         }
         else {
            // Nothing selected.
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(App.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
-
-            alert.showAndWait(); 
+            Alertes.alerte(Alert.AlertType.WARNING,App.getPrimaryStage(), "pas de sélection", "No Person Selected","Please select a person in the table." );
         }
     }
     /**
@@ -174,15 +168,9 @@ private void handleEditPerson() throws Exception {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancNom);
         }
-    } else {
+    }   else {
         // Nothing selected.
-        Alert alert = new Alert(AlertType.WARNING);
-        alert.initOwner(App.getPrimaryStage());
-        alert.setTitle("No Selection");
-        alert.setHeaderText("No Person Selected");
-        alert.setContentText("Please select a person in the table.");
-
-        alert.showAndWait();
-    }
+        Alertes.alerte(Alert.AlertType.WARNING,App.getPrimaryStage(), "pas de sélection", "No Person Selected","Please select a person in the table." );
+        }
     }
 }

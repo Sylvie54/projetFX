@@ -13,13 +13,15 @@ import javafx.stage.Stage;
  * @author Acer
  */
 public class Alertes {
-    public static void alerte(Stage stage, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    
+    
+    public static void alerte (Alert.AlertType alertype,Stage stage, String title, String header, String message ) {
+      Alert alert = new Alert(alertype);
             alert.initOwner( stage);
-            alert.setTitle("problème");
-            alert.setHeaderText("");
+            alert.setTitle(title);
+            alert.setHeaderText(header);
             alert.setContentText(message);
 
-            alert.showAndWait();
+            alert.showAndWait();  
     }
 }

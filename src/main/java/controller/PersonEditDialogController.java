@@ -8,13 +8,12 @@ package controller;
 import AFPA.CDA03.demo.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.ExceptionsModele;
 import model.Person;
 import util.DateUtil;
-//import utilitaires.Alertes;
+import utilitaires.Alertes;
 
 /**
  *
@@ -96,13 +95,8 @@ public class PersonEditDialogController  {
         }
         }
         catch (ExceptionsModele em) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.initOwner(App.getPrimaryStage());
-            alert.setTitle("erreur saisie");
-            alert.setHeaderText("");
-            alert.setContentText(em.getMessage());
-
-        alert.showAndWait();
+       
+            Alertes.alerte(Alert.AlertType.WARNING,App.getPrimaryStage(), "erreur de saisie", "", em.getMessage());
             okClicked = false;
         }
     } 
@@ -160,13 +154,7 @@ public class PersonEditDialogController  {
             return true;
         } else {
             // Show the error message.
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
-            alert.setContentText(errorMessage);
-
-            alert.showAndWait();
+            Alertes.alerte(Alert.AlertType.ERROR,dialogStage, "erreur de saisie", "Please correct invalid fields", errorMessage);
             return false;
         }
     }
