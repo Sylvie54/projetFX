@@ -26,6 +26,7 @@ import model.ExceptionsModele;
  * @author Marco Jakob
  */
 public class Person {
+    private final IntegerProperty id;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty street;
@@ -38,7 +39,7 @@ public class Person {
      * 
      */
     public Person() throws Exception     {
-        this(null, null);
+        this(0,null, null);
     }
     
     /**
@@ -49,12 +50,12 @@ public class Person {
      * @throws java.lang.Exception
      * 
      */
-    public Person(String firstName, String lastName) throws ExceptionsModele  {
+    public Person(int id,String firstName, String lastName) throws ExceptionsModele  {
         
         if (firstName != null && firstName.length() <2 ) {
             throw new ExceptionsModele("le nom doit faire au moins 2 caractères");
         }
-       
+        this.id = new SimpleIntegerProperty(id);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         
@@ -65,6 +66,13 @@ public class Person {
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
         
         
+    }
+    public int getId() {
+        return id.get();
+    }
+    
+    public void setId(int id) {
+        this.id.set(id);
     }
     
     public String getFirstName() {

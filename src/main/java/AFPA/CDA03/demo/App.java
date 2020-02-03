@@ -14,6 +14,7 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
+import javafx.scene.control.Alert;
 import utilitaires.Alertes;
 
 /**
@@ -42,7 +43,8 @@ public class App extends Application
             showPersonOverview();
         }
         catch (Exception e) {
-          Alertes.alerte(primaryStage, "un problème est survenu");
+            Alertes.alerte(Alert.AlertType.WARNING,primaryStage,
+                    "Attention", "Un problème est survenu", "Veuillez réessayer ultérieurement");
             e.printStackTrace();
             System.exit(0);
         }

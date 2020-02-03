@@ -34,7 +34,7 @@ public class BaseSQLServer {
                 Person person;
                 while (Resultat.next())
                 {
-                    person = new Person(Resultat.getString("nom"), Resultat.getString("prenom"));
+                    person = new Person(Resultat.getInt("id"), Resultat.getString("nom"), Resultat.getString("prenom"));
                     App.ajouterPersonne(person);
                 }
     
@@ -73,17 +73,17 @@ public class BaseSQLServer {
      * @param person Person
      * @param ancNom String ancien nom de la personne
      */
-    public static void update(Person person, String ancNom) throws Exception {
-        System.out.println(person.getFirstName() + " ancnom " + ancNom);
+    public static void update(Person person, int ancId) throws Exception {
+        System.out.println(person.getFirstName() + " ancid " + ancId);
         String query = "UPDATE client "
                 + "SET nom = ? "
                 + ", prenom = ? "
-                + "WHERE nom = ? ";
+                + "WHERE id = ? ";
         try(PreparedStatement pstatement = conn.prepareStatement(query)){
             //  Recuperation des parametres pour le PreparedStatement
             pstatement.setString(1, person.getFirstName());
             pstatement.setString(2, person.getLastName());
-            pstatement.setString(3, ancNom);
+            pstatement.setInt(3, ancId);
             //  Execution du PreparedStatement pour modif
             pstatement.executeUpdate();
         }catch(SQLException SQLex){

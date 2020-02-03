@@ -161,12 +161,12 @@ private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
         
-        String ancNom = selectedPerson.getFirstName();
+        int ancId = selectedPerson.getId();
         App app = new App();
         boolean okClicked = app.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
-            BaseSQLServer.update(selectedPerson, ancNom);
+            BaseSQLServer.update(selectedPerson, ancId);
         }
     }   else {
         // Nothing selected.
