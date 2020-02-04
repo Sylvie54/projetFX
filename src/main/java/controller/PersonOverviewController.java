@@ -74,13 +74,11 @@ public class PersonOverviewController {
      */
     @FXML
     private void initialize() {
-        
       
-       firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-       lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-   
-        
-       // Clear person details.
+        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+       
+        // Clear person details.
         showPersonDetails(null);
 
         // Listen for selection changes and show the person details when changed.
@@ -90,8 +88,7 @@ public class PersonOverviewController {
 
     /**
      * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
+     * @param App
      */
     public void setMainApp(App App) {
         this.app = App;
@@ -157,9 +154,8 @@ public class PersonOverviewController {
 private void handleNewPerson() throws Exception  {
     
     Person tempPerson = new Person();
-     
-    App app = new App();
-    boolean okClicked = app.showPersonEditDialog(tempPerson);
+ // appel de la méthode ouvrant la fenêtre modale de création/édition de la personne
+    boolean okClicked = App.showPersonEditDialog(tempPerson);
     if (okClicked) {
         int dernierId = BaseSQLServer.insert(tempPerson);
         tempPerson.setId(dernierId);
@@ -178,9 +174,7 @@ private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
         int ancId = selectedPerson.getId();
-         System.out.println("id : " + ancId);
-        App app = new App();
-        boolean okClicked = app.showPersonEditDialog(selectedPerson);
+        boolean okClicked = App.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancId);
