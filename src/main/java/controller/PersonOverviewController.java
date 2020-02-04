@@ -14,14 +14,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import AFPA.CDA03.demo.App;
+import DAO.BaseSQLServer;
+import model.Person;
+import java.util.Optional;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import model.Person;
-import util.DateUtil;
-import DAO.*;
-import java.util.Optional;
 import javafx.scene.control.ButtonType;
-import model.ExceptionsModele;
+import util.DateUtil;
 import utilitaires.Alertes;
 
 public class PersonOverviewController {
@@ -47,12 +50,27 @@ public class PersonOverviewController {
 
     // Reference to the main application.
     private App app;
+    
+    private final IntegerProperty pId  ;
+    private final StringProperty pFirstName;
+    private final StringProperty pLastName;
+//    private final StringProperty pstreet;
+//    private final IntegerProperty pPostalCode;
+//    private final StringProperty pCity;
+//    private final ObjectProperty<LocalDate> pBirthday;
 
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
     public PersonOverviewController() {
+        this(0,null, null);
+    }
+    
+    public PersonOverviewController(int id,String firstName, String lastName) {
+        this.pId = new SimpleIntegerProperty(id);
+        this.pFirstName = new SimpleStringProperty(firstName);
+        this.pLastName = new SimpleStringProperty(lastName);
     }
 
     /**
@@ -61,9 +79,20 @@ public class PersonOverviewController {
      */
     @FXML
     private void initialize() {
+        
+//       this.pid = new SimpleIntegerProperty(id);
+//        this.firstName = new SimpleStringProperty(firstName);
+//        this.lastName = new SimpleStringProperty(lastName);
+//        
+//        // Some initial dummy data, just for convenient testing.
+//        this.street = new SimpleStringProperty("some street");
+//        this.postalCode = new SimpleIntegerProperty(1234);
+//        this.city = new SimpleStringProperty("some city");
+//        this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+        
         // Initialize the person table with the two columns.
-       firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-       lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+   //    firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+   //    lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
        
        // Clear person details.
         showPersonDetails(null);
@@ -173,4 +202,10 @@ private void handleEditPerson() throws Exception {
         Alertes.alerte(Alert.AlertType.WARNING,App.getPrimaryStage(), "pas de sélection", "No Person Selected","Please select a person in the table." );
         }
     }
+public StringProperty firstNameProperty() {
+    return pFirstName;
+}
+public StringProperty lastNameProperty() {
+    return pLastName;
+}
 }
