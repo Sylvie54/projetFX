@@ -21,7 +21,7 @@ import model.Person;
  */
 public class BaseSQLServer {
    private static Connection conn = Connexion.getConn();
-   private static ResultSet Resultat = null;
+   private static ResultSet resultat = null;
    
    /**
     * méthode de sélection de toutes les personnes
@@ -30,11 +30,11 @@ public class BaseSQLServer {
         try {
                 Statement stm = conn.createStatement(); // crÃ©ation d'un objet requÃªte directe 
 
-                Resultat = stm.executeQuery("SELECT *  FROM client");
+                resultat = stm.executeQuery("SELECT *  FROM client");
                 Person person;
-                while (Resultat.next())
+                while (resultat.next())
                 {
-                    person = new Person(Resultat.getInt("id"), Resultat.getString("nom"), Resultat.getString("prenom"));
+                    person = new Person(resultat.getInt("id"), resultat.getString("nom"), resultat.getString("prenom"));
                     App.ajouterPersonne(person);
                 }
     
@@ -44,7 +44,7 @@ public class BaseSQLServer {
             throw new Exception (e.getMessage());
         }
         finally {
-            Resultat.close();
+            resultat.close();
         }
         
     }
@@ -52,21 +52,29 @@ public class BaseSQLServer {
      * méthode d'insertion d'une personne
      * @param person Person
      */
-    public static void insert(Person person) throws Exception {
+    public static int insert(Person person) throws Exception {
+        int idGenere = 0;
         String query = "INSERT INTO client ("
                 + " nom,"
                 + " prenom) VALUES ("
                 + "?, ?)";
-        try(PreparedStatement pstatement = conn.prepareStatement(query)){
+        try{
+            PreparedStatement pstatement = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS );
             
             //  Recuperation des parametres pour le PreparedStatement
             pstatement.setString(1, person.getFirstName());
             pstatement.setString(2, person.getLastName());
             //  Execution du PreparedStatement pour insertion
             pstatement.executeUpdate();
+            resultat= pstatement.getGeneratedKeys();
+            while (resultat.next()) {
+                idGenere = resultat.getInt(1);
+            }
         }catch(SQLException SQLex){
+            System.out.println("message : " + SQLex.getMessage());
             SQLex.printStackTrace();
         }
+        return idGenere;
     }
     /**
      * 
