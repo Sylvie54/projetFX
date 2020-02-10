@@ -29,29 +29,39 @@ import utilitaires.Alertes;
  */
 public class App extends Application
 {
+    // première étape : Main container
     private static Stage primaryStage;
+    // disposition de base
     private BorderPane rootLayout;
+    
+    // liste observable d'objets Person
     private static ObservableList<Person> personData = FXCollections.observableArrayList();
 
+    // méthode start lancé automatiquement (classe Application)
     @Override
     public void start(Stage primaryStage) {
         try {
             this.primaryStage = primaryStage;
             this.primaryStage.setTitle("AddressApp");
-            // sortie del'application par la croix du borderPane
+            /*
+                sortie de l'application par la croix du borderPane,
+                fermeture de la connexion
+            */ 
             this.primaryStage.setOnCloseRequest(event ->
             {
+                Connexion.closeConnection();
                 System.exit(0);
             });  
-
+            // appel de la méthode d'initialisation de la base    
             initRootLayout();
-
+            // appel de la méthode initialisant la  première scène 
             showPersonOverview();
         }
         catch (Exception e) {
             Alertes.alerte(Alert.AlertType.WARNING,primaryStage,
                     "Attention", "Un problème est survenu", "Veuillez réessayer ultérieurement");
             e.printStackTrace();
+            Connexion.closeConnection();
             System.exit(0);
         }
     }
@@ -64,13 +74,14 @@ public class App extends Application
     }
     /**
      * Initializes the root layout.
+     * @throws java.lang.Exception
      */
     public void initRootLayout() throws Exception {
        
         // Load root layout from fxml file.
 
         FXMLLoader loader = new FXMLLoader();
-
+        // spécifique à Maven
         loader.setLocation(getClass().getClassLoader().getResource("RootLayout.fxml"));
         rootLayout = (BorderPane) loader.load();
 
@@ -78,7 +89,9 @@ public class App extends Application
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
-        // accès base de données
+        /*
+        connexion à base de données et chargement des données de la base
+        */
         Connexion.AccesBase();
         BaseSQLServer.selectAll();
         try {
@@ -148,10 +161,10 @@ public class App extends Application
      * @return true if the user clicked OK, false otherwise.
      * @throws java.lang.Exception
      */
-    public boolean showPersonEditDialog(Person person) throws Exception  {
+    public static boolean showPersonEditDialog(Person person) throws Exception  {
         try {            // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("PersonEditDialog.fxml"));
+            loader.setLocation(App.class.getClassLoader().getResource("PersonEditDialog.fxml"));
            
             AnchorPane page = (AnchorPane) loader.load();
 
@@ -163,6 +176,7 @@ public class App extends Application
             // sortie del'application par la croix du borderPane
             dialogStage.setOnCloseRequest(event ->
             {
+                Connexion.closeConnection();
                 System.exit(0);
             });    
             Scene scene = new Scene(page);

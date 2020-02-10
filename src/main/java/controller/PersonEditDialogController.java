@@ -72,7 +72,7 @@ public class PersonEditDialogController  {
     
     /**
      * Returns true if the user clicked OK, false otherwise.
-     *
+     *  
      * @return
      */
     public boolean isOkClicked() {

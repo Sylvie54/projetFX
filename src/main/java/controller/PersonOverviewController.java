@@ -14,24 +14,34 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import AFPA.CDA03.demo.App;
+import DAO.BaseSQLServer;
+import model.Person;
+import java.util.Optional;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import model.Person;
-import util.DateUtil;
-import DAO.*;
-import java.util.Optional;
 import javafx.scene.control.ButtonType;
-import model.ExceptionsModele;
+import util.DateUtil;
 import utilitaires.Alertes;
 
 public class PersonOverviewController {
     @FXML
     private TableView<Person> personTable;
     @FXML
+  //  private TableColumn<Person, String> firstNameColumn;
     private TableColumn<Person, String> firstNameColumn;
     @FXML
-    private TableColumn<Person, String> lastNameColumn;
+  //  private TableColumn<Person, String> lastNameColumn;
+    private TableColumn<Person, String>lastNameColumn;
 
+    public TableColumn getFirstNameColumn() {
+        return firstNameColumn;
+    }
+
+    public void setFirstNameColumn(TableColumn firstNameColumn) {
+        this.firstNameColumn = firstNameColumn;
+    }
+    
+    
     @FXML
     private Label firstNameLabel;
     @FXML
@@ -47,6 +57,7 @@ public class PersonOverviewController {
 
     // Reference to the main application.
     private App app;
+  
 
     /**
      * The constructor.
@@ -54,6 +65,8 @@ public class PersonOverviewController {
      */
     public PersonOverviewController() {
     }
+    
+   
 
     /**
      * Initializes the controller class. This method is automatically called
@@ -61,11 +74,11 @@ public class PersonOverviewController {
      */
     @FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
-       firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-       lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+      
+        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
        
-       // Clear person details.
+        // Clear person details.
         showPersonDetails(null);
 
         // Listen for selection changes and show the person details when changed.
@@ -75,8 +88,7 @@ public class PersonOverviewController {
 
     /**
      * Is called by the main application to give a reference back to itself.
-     * 
-     * @param mainApp
+     * @param App
      */
     public void setMainApp(App App) {
         this.app = App;
@@ -142,12 +154,13 @@ public class PersonOverviewController {
 private void handleNewPerson() throws Exception  {
     
     Person tempPerson = new Person();
-     
-    App app = new App();
-    boolean okClicked = app.showPersonEditDialog(tempPerson);
+ // appel de la méthode ouvrant la fenêtre modale de création/édition de la personne
+    boolean okClicked = App.showPersonEditDialog(tempPerson);
     if (okClicked) {
+        int dernierId = BaseSQLServer.insert(tempPerson);
+        tempPerson.setId(dernierId);
         App.getPersonData().add(tempPerson);
-        BaseSQLServer.insert(tempPerson);
+       
     }
     
 }
@@ -160,10 +173,8 @@ private void handleNewPerson() throws Exception  {
 private void handleEditPerson() throws Exception {
     Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
     if (selectedPerson != null) {
-        
         int ancId = selectedPerson.getId();
-        App app = new App();
-        boolean okClicked = app.showPersonEditDialog(selectedPerson);
+        boolean okClicked = App.showPersonEditDialog(selectedPerson);
         if (okClicked) {
             showPersonDetails(selectedPerson);
             BaseSQLServer.update(selectedPerson, ancId);

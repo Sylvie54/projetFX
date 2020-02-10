@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import AFPA.CDA03.demo.App;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
+import utilitaires.Alertes;
 
 
 /**
@@ -43,7 +45,12 @@ public class Connexion  {
             if (result.get() == buttonTypeOne){
                 prop.load(Connexion.class.getClassLoader().getResourceAsStream("dataBase.properties"));
             } else if (result.get() == buttonTypeTwo) {
-                prop.load(Connexion.class.getClassLoader().getResourceAsStream("dataBaseSQLServer.properties"));
+                String driver ="com.microsoft.sqlserver.jdbc.SQLSERVERDRIVER";        
+                String mysqlUser = "sa";
+                String mysqlPassword = "root"; 
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver" );
+         //     String connexionString = "jdbc:sqlserver://localhost;database=Essai;user=sa;password=root;"; 
+         //     prop.load(Connexion.class.getClassLoader().getResourceAsStream("dataBaseSQLServer.properties"));
             } else {
                 System.exit(0);
             }
@@ -51,16 +58,19 @@ public class Connexion  {
             String mysqlUser = prop.getProperty("sgbd.login");
             String mysqlPassword = prop.getProperty("sgbd.password");
             String connexionString = prop.getProperty("sgbd.connexionString"); 
-            System.out.println("driver : " + prop.getProperty("sgbd.driver"));
+    //        System.out.println("driver : " + prop.getProperty("sgbd.driver"));
             Class.forName(driver);
             conn = DriverManager.getConnection(connexionString, mysqlUser, mysqlPassword);  
         }    
         catch ( ClassNotFoundException e )
         {
             e.printStackTrace();
+            System.exit(0);
         }    
         catch (Exception e) {
             e.printStackTrace();
+            conn.close();
+            System.exit(0);
         }
         
     } 
@@ -68,5 +78,14 @@ public class Connexion  {
     public static Connection getConn() {
         return conn;
     }
+    public static void closeConnection() {
+        try { 
+            conn.close();
+        }
+        catch (Exception e) {
+            Alertes.alerte(Alert.AlertType.ERROR,App.getPrimaryStage(),
+                "Attention", "Un problème est survenu", "Veuillez réessayer ultérieurement");
+        }
+     }
  
 }

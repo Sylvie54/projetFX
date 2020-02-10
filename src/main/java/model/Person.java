@@ -9,7 +9,6 @@ package model;
  *
  * @author Acer
  */
-import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 
 import javafx.beans.property.IntegerProperty;
@@ -18,7 +17,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import model.ExceptionsModele;
+
 
 /**
  * Model class for a Person.
@@ -33,6 +32,7 @@ public class Person {
     private final IntegerProperty postalCode;
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
+   
 
     /**
      * Default constructor.
@@ -64,11 +64,13 @@ public class Person {
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");
         this.birthday = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+     
         
         
     }
     public int getId() {
         return id.get();
+      
     }
     
     public void setId(int id) {
@@ -76,7 +78,7 @@ public class Person {
     }
     
     public String getFirstName() {
-        return firstName.get();
+       return firstName.get();
     }
 
     public void setFirstName(String firstName) throws ExceptionsModele  {
@@ -91,7 +93,7 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName.get();
+       return lastName.get();
     }
 
     public void setLastName(String lastName) {
