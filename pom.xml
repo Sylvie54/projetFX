@@ -76,6 +76,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -134,5 +135,11 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>5.1.23</version>
     </dependency>
+ <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongo-java-driver</artifactId>
+        <version>3.12.1</version>
+    </dependency>   
   </dependencies>
 </project>

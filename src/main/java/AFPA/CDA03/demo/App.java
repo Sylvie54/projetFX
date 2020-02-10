@@ -14,6 +14,12 @@ import model.Person;
 import controller.PersonOverviewController;
 import javafx.stage.Modality;
 import DAO.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import javafx.scene.control.Alert;
 import utilitaires.Alertes;
 
@@ -75,7 +81,31 @@ public class App extends Application
         // accès base de données
         Connexion.AccesBase();
         BaseSQLServer.selectAll();
-            
+        try {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        DB database = mongoClient.getDB("new_york");
+        System.out.println("connect ok");
+        DBCollection restoCollection = database.getCollection("restaurants");
+            BasicDBObject query = new BasicDBObject();
+            BasicDBObject field = new BasicDBObject();
+            query.put("name", "Kosher Island");
+            field.put("name", 1);
+            field.put("cuisine", 1);
+        DBCursor cursor = restoCollection.find(query, field);
+        try {
+        while(cursor.hasNext()) {
+           DBObject obj = cursor.next();
+           System.out.println(obj.get("name") + " => " + obj.get("cuisine"));
+           }
+        } finally {
+           cursor.close();
+        }
+        }
+        catch (Exception e) { 
+            e.printStackTrace();
+            System.exit(0);
+        
+        }    
     }
 
     /**
